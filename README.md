@@ -6,7 +6,7 @@ dernier consultable sans gêne visuelle, comme n'importe quel fichier HTML.
 
 Il permet également de présenter des contenus de test ou de validation, qui seront remplacés lors du calcul de la page.
 
-## Utilisation côté développeur
+## Configuration de Complate
 
 Pour charger Complate, il faut actuellement inclure sa classe, ainsi que celle de [SimpleHTMLDOM](simplehtmldom.sourceforge.net), dont Complate dépend.
 
@@ -76,7 +76,7 @@ $complate = new Complate('template.html');
 $complate->useZone('ma_zone');
 ```
 
-## Utilisation côté webdesigneur
+## Utilisation du template
 
 ### Affichage d'une donnée
 Il suffit pour cela de créer une paire de balises de commentaires HTML contenant le nom de la clé à remplacer
@@ -93,6 +93,11 @@ ce qui permet de créer des templates avec des contenus de test.
 
 Il est également possible de préciser le contenu à remplacer entre hashes, de cette manière : `#CLE#`. Par contre il ne
 sera forcément plus possible d'afficher un contenu différent dans le template.
+
+### Gestion des valeurs booléennes
+Lorsqu'une valeur booléenne est passée à Complate, cela implique le comportement suivant :
+* `true` : le contenu est affiché sans modification, la paire de commentaires est conservée
+* `false` : le contenu n'est pas affiché, la paire de commentaires est supprimée
 
 ### Affichage d'un array
 Pour afficher un array, la syntaxe est légèrement différente :
@@ -119,7 +124,7 @@ Pour afficher un array, la syntaxe est légèrement différente :
 Avec cette configuration, nous aurons les possibilités suivantes :
 * Les contenus optionnels présents dans le template entre les commentaires `CONTENT` mais hors du commentaire `REPEAT`
   ne seront pas affichés
-* Si l'array est vide, ce qui se trouve entre les balises principales (Ici, `LISTE`) ne seront pas affichées. Ainsi,
+* Si l'array est vide, ce qui se trouve entre les balises principales (Ici, `LISTE`) ne sera pas affiché. Ainsi,
   nous évitons de générer un code HTML erroné (Un ul sans enfants).
 
 ### Affichage d'un menu
@@ -137,3 +142,25 @@ qui remplacera la paire de balises `REPEAT` lorsque la clé `url` de l'élément
 <!-- MENU -->
 ```
 Dans l'exemple précédent, le menu actif ne comportera pas de lien.
+
+### Affichage conditionnel
+Complate permet de gérer des conditions simples d'affichage, en fonction de la valeur de la clé. Lors de la création 
+de cette dernière (Appelons-la `X`, et si les clés correspondantes n'existent pas encore, deux clés sont créées :
+* `IS_X` vaudra `true` (Voir la section sur les booléens) si X est rempli, false dans le cas contraire
+* `IS_NOT_X` sera le contraire de `IS_X`
+
+Ces deux clés supplémentaires permettent de conditionner l'affichage de tout un bloc de contenu en fonction de la
+présence ou l'absence de contenu dans une clé.
+
+Dans l'exemple ci-dessous, le code HTML servant à la mise en forme d'un message d'erreur ne sera inclus dans la page
+que si la clé `error` passée à Complate n'est pas vide. Dans le cas contraire, le message "Aucune erreur" sera affiché.
+
+```html
+<!-- IS_ERROR -->
+<p><!-- ERROR -->Message d'erreur<!-- ERROR --></p>
+<!-- IS_ERROR -->
+
+<!-- IS_NOT_ERROR -->
+<p>Il n'y a aucune erreur à afficher</p>
+<!-- IS_NOT_ERROR -->
+```
