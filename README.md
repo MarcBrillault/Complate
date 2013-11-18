@@ -91,8 +91,28 @@ ce qui permet de créer des templates avec des contenus de test.
 </h1>
 ```
 
-Il est également possible de préciser le contenu à remplacer entre hashes, de cette manière : `#CLE#`. Par contre il ne
-sera forcément plus possible d'afficher un contenu différent dans le template.
+Il est également possible de préciser le contenu à remplacer entre hashes, de cette manière : `#CLE#`.
+Cela peut être utile aux endroits où les commentaires HTML ne sont pas autorisés, comme en attribut de balise :
+
+```html
+<img src="#IMAGE#">
+```
+
+Toutefois, cette méthode a l'inconvénient de casser l'affichage du template en le faisant afficher une ressource
+non disponible.
+
+Complate permet d'éviter ce souci en appelant un contenu par défaut dans la balise, et le code complate dans un attribut
+complate de la balise :
+```html
+<img src="image.png" complate="src=image"> 
+```
+
+Il est de plus possible de lister plusieurs attributs dans l'attribut complate. Les attributs n'existant pas encore seront
+créés à la volée, les autres seront remplacés :
+
+```html
+<img src="image.png" complate="src=image, title=titre">
+```
 
 ### Gestion des valeurs booléennes
 Lorsqu'une valeur booléenne est passée à Complate, cela implique le comportement suivant :
