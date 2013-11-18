@@ -164,3 +164,23 @@ que si la clé `error` passée à Complate n'est pas vide. Dans le cas contraire
 <p>Il n'y a aucune erreur à afficher</p>
 <!-- IS_NOT_ERROR -->
 ```
+
+### Adaptation automatique des chemins
+Il n'y a pas de souci à placer les ressources (Images, feuilles de styles et scripts) dans un répertoire différent du
+script PHP : Complate gère parfaitement l'adaptation des chemins relatifs (Et ce, jusqu'aux commentaires conditionnels).
+
+### Utilisation d'AJAX
+Lorsqu'on refraîchit une partie de la page avec AJAX, on peut être tenté de créer un template spécifique à la partie AJAX.
+Toutefois, tant qu'il n'y a pas de modification, il est tout à fait possible d'utiliser le même fichier pour une page et
+tous ses contenus AJAX.
+
+Avec l'utilisation de la fonction `useZone()`, le fichier appelé par AJAX permet d'isoler une partie spécifique du template,
+afin de ne pouvoir utiliser que cela par la suite.
+
+## Fonctionnalités additionnelles
+Complate permet également des fonctionnalités supplémentaires. Par contre, ces méthodes s'éloignant du concept "premier"
+de Complate, il est possible qu'elles ne soient pas incluses dans les futures versions du script.
+
+### Remplissage automatique de formulaire
+Lorsqu'un formulaire est présent sur la page, il est automatiquement prérempli si les paramètres correspondants à sa
+méthode (GET ou POST) sont définis dans le script appelant.
