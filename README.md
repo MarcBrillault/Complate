@@ -165,7 +165,7 @@ Dans l'exemple précédent, le menu actif ne comportera pas de lien.
 
 ### Affichage conditionnel
 Complate permet de gérer des conditions simples d'affichage, en fonction de la valeur de la clé. Lors de la création 
-de cette dernière (Appelons-la `X`, et si les clés correspondantes n'existent pas encore, deux clés sont créées :
+de cette dernière (Appelons-la `X`, deux clés sont créées :
 * `IS_X` vaudra `true` (Voir la section sur les booléens) si X est rempli, false dans le cas contraire
 * `IS_NOT_X` sera le contraire de `IS_X`
 
