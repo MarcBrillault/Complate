@@ -174,7 +174,7 @@
 							$contenu	.=	$tmp;
 						}
 					}
-					$pod		=	$this->setZone('contenu', $contenu, $pod);
+					$pod		=	$this->setZone('content', $contenu, $pod);
 					$this->html	=	$this->setZone($zone, $pod, $this->html);
 				}
 			}
@@ -187,13 +187,11 @@
 				if(is_array($value) && !empty($value))
 					$this->isData($tab[$key]);
 				if(!preg_match('#is_.*#', $key)) {
-					if(!array_key_exists('is_'.$key, $tab)) {
-						$is_data	=	true;
-						if($value === null || $value === '' || empty($value))
-							$is_data = false;
-						$tab['is_'.$key]		=	$is_data;
-						$tab['is_not_'.$key]	=	!$is_data;
-					}
+					$is_data	=	true;
+					if($value === null || $value === '' || empty($value) || $value === false)
+						$is_data = false;
+					$tab['is_'.$key]		=	$is_data;
+					$tab['is_not_'.$key]	=	!$is_data;
 				}
 			}
 		}
@@ -226,7 +224,7 @@
 				return false;
 			$html	=	<<<COMPLATE_ERRORS
 				<div class="complate_errors">
-					Voici les erreurs rencontrées :
+					Complate has encountered some errors :
 					<ul>
 						#ERRORS#
 					</ul>
@@ -315,7 +313,7 @@ COMPLATE_ERRORS;
 			if(file_exists($this->template))
 				$this->setHtml(file_get_contents($this->getTemplate()), true);
 			else
-				$this->setError('Le chemin vers le fichier de template n\'est pas valide');
+				$this->setError('The template file path is not valid.');
 		}
 		
 		public function setUrl($url) {
@@ -361,7 +359,7 @@ COMPLATE_ERRORS;
 				$this->setData($tab);
 		}
 		
-		public	function setZone($reg, $contenu, $html = null) {
+		public function setZone($reg, $contenu, $html = null) {
 			if(!$html)
 				$html	=	$this->html;
 			if($contenu === true)
