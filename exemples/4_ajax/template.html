@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Utilisation d'Ajax</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<h1>Utilisation de Complate dans un contexte AJAX</h1>
+			</div>
+		
+			<div>
+				<h2>Gestion de prévisions météo</h2>
+				<p>
+					Avec l'utilisation de la fonction <code>useZone()</code> qui permet de ne conserver que le code contenu entre deux paires de
+					commentaires HTML, Complate permet une utilisation extrêmement facile d'AJAX avec un seul et même template.
+				</p>
+				<p>
+					Dans l'exemple suivant, une légère adaptation d'un script "statique" (limitation de la zone avec un paramètre _GET,
+					et ajout d'un fichier JavaScript) permet d'afficher en AJAX les modifications de prévisions météo selon les villes.
+				</p>
+			<!-- LISTE_VILLES -->
+			<div class="row">
+				<form class="form-inline col-lg-4" method="get">
+					<select name="ville" id="previsions_villes" class="form-control">
+						<!-- CONTENT -->
+						<!-- REPEAT -->
+						<option><!-- VILLE -->Sélectionnez une ville<!-- VILLE --></option>
+						<!-- REPEAT -->
+						<!-- CONTENT -->
+					</select>
+				</form>
+			</div>
+			<!-- LISTE_VILLES -->
+			
+			<!-- PREVISIONS -->
+			<div class="row" id="previsions">
+				<h3>Prévisions météo pour <!-- VILLE -->Ville<!-- VILLE --></h3>
+				<!-- CONTENT -->
+				<!-- REPEAT -->
+				<div class="col-lg-2 col-md-4 col-sm-6">
+					<h3><!-- DATE -->01/01/2013<!-- DATE --></h3>
+					<div class="thumbnail">
+						<img src="img/01d.png" complate="src=img">
+						T° min  : <b><!-- MIN -->23<!-- MIN -->°C</b><br>
+						T° max  : <b><!-- MAX -->25<!-- MAX -->°C</b>
+					</div>
+				</div>
+				<!-- REPEAT -->
+				<!-- CONTENT -->
+			</div>
+			<!-- PREVISIONS -->
+			<p class="well">
+				Le script utilise l'API d'<a href="http://openweathermap.org/">Open Weather Maps</a> ainsi que les 
+				<a href="http://fr.wikinews.org/wiki/Utilisateur:Grondin/M%C3%A9t%C3%A9o?uselang=fr#Principales_ic.C3.B4nes">images de Bertrand 
+				Grondin</a>.
+			</p>
+			</div>
+		</div>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="ajax.js"></script>
+	</body>
+</html>

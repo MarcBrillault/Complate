@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Remplacements d'arrays</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<h1>Exemples de remplacements d'arrays</h1>
+			</div>
+		
+			<div>
+				<h2>Balises Complate</h2>
+				<p>
+					Un array a besoin de trois paires de commentaires HTML : <code>&lt;!-- XXX --&gt;</code>,
+					<code>&lt;!-- CONTENT --&gt;</code> et <code>&lt;!-- REPEAT --&gt;</code>
+				</p>
+				<ul>
+					<li><code>&lt;!-- XXX --&gt;</code> correspond au nom donné à l'array dans la fonction <code>setData()</code>.</li>
+					<li><code>&lt;!-- CONTENT --&gt;</code> correspond à ce qui sera supprimé du code HTML lors du rendu.</li>
+					<li><code>&lt;!-- REPEAT --&gt;</code> correspond au contenu qui sera répété pour chaque élément de l'array.</li>
+				</ul>
+				<p>
+					Ainsi, chaque élément du code compris entre les balises <code>&lt;!-- CONTENT --&gt;</code> mais hors des balises <code>&lt;!-- REPEAT --&gt;</code>
+					sera tout simplement supprimé, permettant au fichier de template de proposer plusieurs éléments à titre d'exemple.
+				</p>
+				
+				<h2>Gestion de l'array</h2>
+				<p>
+					Chaque élément à fournir à Complate est un array, qui contient lui-même un array par élément, dont les clés correspondent aux contenus à remplacer.
+				</p>
+				<p>
+					Voici à quoi ressemble l'array transmis à Complate :
+				</p>
+				<pre class="prettyprint">
+$data	=	array(
+	'liste1'	=>	array(
+		array('texte'	=>	'Premier élément'),
+		array('texte'	=>	'Second élément'),
+		array('texte'	=>	'Troisième élément')
+	)
+);
+				</pre>
+				<p>
+					Et voici la liste, une fois les éléments de test <a href="template.html">du template</a> supprimés et les éléments de l'array ajoutés :
+				</p>
+				<!-- LISTE1 -->
+				<ul class="list-group">
+					<!-- CONTENT -->
+					<li class="list-group-item">Contenu d'exemple</li>
+					<!-- REPEAT -->
+					<li class="list-group-item"><!-- TEXTE -->Contenu à répéter<!-- TEXTE --></li>
+					<!-- REPEAT -->
+					<li class="list-group-item">Contenu d'exemple</li>
+					<!-- CONTENT -->
+				</ul>
+				<!-- LISTE1 -->
+				
+				<p>
+					Il est bien sûr possible de remplacer plusieurs valeurs à la fois :
+				</p>
+				
+				<!-- LISTE2 -->
+				<ul>
+					<!-- CONTENT -->
+					<!-- REPEAT -->
+					<li class="thumbnail col-md-4">
+						<img src="http://placehold.it/400x150" complate="src=image">
+						<div class="caption">
+							<h3><!-- TITRE -->Titre<!-- TITRE --></h3>
+							<p>#TEXTE#</p>
+						</div>
+					</li>
+					<!-- REPEAT -->
+					<!-- CONTENT -->
+				</ul>
+				<!-- LISTE2 -->
+				
+				<h2>Gestion d'un menu</h2>
+				<p>
+					Il est possible de gérer un menu avec un élément actif en suivant les étapes suivantes :
+				</p>
+				<ul>
+					<li>Définir une url pour la page avec la fonction <code>setUrl()</code></li>
+					<li>Attribuer une clé <code>url</code> à chacun des éléments</li>
+					<li>Utiliser la paire de commentaires <code>&lt;!-- REPEAT_IN --&gt;</code> pour différencier l'élément actif.</li>
+				</ul>
+				<p>
+					Dans notre exemple suivant, l'élément actif possède une classe <code>.active</code>.
+				</p>
+				
+				<!-- MENU -->
+				<ul class="nav nav-pills" id="menu">
+					<!-- CONTENT -->
+					<!-- REPEAT -->
+					<li><a href="?page=#URL##menu"><!-- TEXTE -->&Eacute;lement non actif<!-- TEXTE --></a></li>
+					<!-- REPEAT -->
+					<!-- REPEAT_IN -->
+					<li class="active"><a href="?page=#URL##menu"><!-- TEXTE -->&Eacute;lement actif<!-- TEXTE --></a></li>
+					<!-- REPEAT_IN -->
+					<!-- CONTENT -->
+				</ul>
+				<!-- MENU -->
+			</div>
+		</div>
+		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=php"></script>
+	</body>
+</html>

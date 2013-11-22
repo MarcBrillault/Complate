@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>#TITRE#</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<h1>Exemples de remplacements de chaînes</h1>
+			</div>
+		
+			<div>
+				<h2>Remplacement de contenus entre commentaires</h2>
+				<p>
+					<!-- EXEMPLE1 -->
+					Le contenu que vous pouvez lire dans ce template sera remplacé par celui défini dans le fichier PHP.
+					<!-- EXEMPLE1 -->
+				</p>
+				
+				<h2>Remplacement de contenu entre hashes</h2>
+				<p>
+					Dans l'image suivante, l'attribut <code>src</code> est entre hashes. Dans le fichier rendu, on affichera l'image désirée.
+				</p>
+				<img src="#SRC1#">
+				<p>
+					Il est aussi possible de remplacer n'importe quel contenu entre hashes : la balise <code>&lt;title&gt;</code> de la page est elle
+					aussi remplie avec des hashes.
+				</p>
+				
+				<h2>L'attribut complate</h2>
+				<p>L'exemple précédent avait l'inconvénient de produire une image cassée dans le <a href="template.html">fichier de template</a>.
+					Pour y remédier, il suffit de laisser une image par défaut dans l'attribut <code>src</code>, et d'ajouter un attribut
+					<code>complate</code> écrit de la manière suivante : <code>&lt;img src="defaut.png" complate="src=src2"&gt;</code>
+				</p>
+				<img src="http://placehold.it/650x200" complate="src=src2">
+				<p>
+					Il est possible de créer plusieurs attributs à la fois en les mettant à la suite dans l'attribut complate, séparés par des virgules.
+					Les attributs inexistants seront créés. L'imagine suivante aura une source et un titre attribués par Complate.
+				</p>
+				<img src="http://placehold.it/650x200" complate="src=src3,title=titre3">
+				
+				<footer class="well">
+					Les images présentes sur cette page sont issues de <a href="http://placehold.it">Placehold.it</a> et <a href="http://lorempixel.com">LoremPixel</a>.
+				</footer>
+			</div>
+		</div>
+	</body>
+</html>

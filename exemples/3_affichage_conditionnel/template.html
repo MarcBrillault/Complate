@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Affichage conditionnel</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<h1>Affichage conditionnel</h1>
+			</div>
+		
+			<div>
+				<p>
+					La fonction <code>setData()</code> de Complate ajoute deux clés booléennes par élément <code>XXX</code> : <code>IS_XXX</code> et
+					<code>IS_NOT_XXX</code>.
+				</p>
+				<p>
+					Dans Complate, un booléen se comporte de la manière suivante :
+				</p>
+				<ul>
+					<li><code>true</code> : ne modifie pas le template, en laissant les commentaires HTML.</li>
+					<li><code>false</code> : supprime le contenu ainsi que les commentaires HTML du template</li>
+				</ul>
+				
+				<h2>Exemple avec un fil de commentaires</h2>
+				<p>
+					Dans l'exemple suivant, les boutons et le message d'erreur sont entourés de balises <code>&lt;!-- IS_COMMENTAIRES --&gt;</code> et
+					<code>&lt;!-- IS_NOT_COMMENTAIRES --&gt;</code>. Par défaut, les commentaires étant présents, leurs valeurs respectives sont <code>true</code>
+					et <code>false</code>. Le script détecte la présence du paramètre _GET <code>nocomment</code>, désactive les commentaires (<code>comments = false</code>)
+					et par conséquent inverse les valeurs de <code>is_commentaires</code> et <code>is_not_commentaires</code>.
+				</p>
+				<p>
+					Comme vous pouvez le constater dans le <a href="template.html">code source du template</a>, il n'est pas nécessaire d'entourer la paire de balises
+					<code>&lt;!-- COMMENTAIRES --&gt;</code> de balises <code>&lt;!-- IS_COMMENTAIRES --&gt;</code>, l'absence de contenu dans la première paire de
+					balises entraîant automatiquement leur disparition.
+				</p>
+				
+				<!-- IS_COMMENTAIRES -->
+				<a href="index.php?nocomment" class="btn btn-danger">Masquer les commentaires</a>
+				<!-- IS_COMMENTAIRES -->
+				
+				<!-- IS_NOT_COMMENTAIRES -->
+				<a href="index.php" class="btn btn-success">Afficher les commentaires</a>
+				<!-- IS_NOT_COMMENTAIRES -->
+				<hr>
+				<!-- IS_NOT_COMMENTAIRES -->
+				<div class="alert alert-danger">Aucun commentaire à afficher</div>
+				<!-- IS_NOT_COMMENTAIRES -->
+				
+				<!-- COMMENTAIRES -->
+				<div id="commentaires">
+					<!-- CONTENT -->
+					<!-- REPEAT -->
+					<div class="media">
+						<img class="media-object pull-left" src="http://placehold.it/73x73" width="73" height="73" alt="" title="#NOM#" complate="src=image">
+						<div class="media-body">
+							<h4 class="media-heading"><!-- NOM -->John Doe<!-- NOM --></h4>
+							<p>
+								<!-- TEXTE -->
+								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in
+								vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+								<!-- TEXTE -->
+							</p>
+						</div>
+					</div>
+					<!-- REPEAT -->
+					<!-- CONTENT -->
+				</div>
+				
+				<p class="well">
+					Les images et noms des participants à cet exemple sont tirés d'utilisateurs volontaires d'<a href="http://uifaces.com/authorized">uiFaces</a>.
+				</p>
+				<!-- COMMENTAIRES -->
+			</div>
+		</div>
+		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=php"></script>
+	</body>
+</html>
